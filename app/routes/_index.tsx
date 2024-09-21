@@ -1,6 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useDispatch, useSelector } from "react-redux";
-import { remove, set } from "~/stores/generalSlice";
+import { useAppDispatch, useAppSelector } from "~/hooks";
+import { removeFrom, selectCountryFrom, setFrom } from "~/stores/countriesSlice";
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,8 +11,8 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Counter() {
-  const count = useSelector(state => state.countryFrom.value)
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
+  const userName = useAppSelector(selectCountryFrom)
 
   return (
     <div>
@@ -19,14 +20,14 @@ export default function Counter() {
         <p>test</p>
         <button
           aria-label="Increment value"
-          onClick={() => dispatch(set('elo'))}
+          onClick={() => dispatch(setFrom('elo'))}
         >
           Increment
         </button>
-        <span>{count}</span>
+        <span>{userName.value}</span>
         <button
           aria-label="Decrement value"
-          onClick={() => dispatch(remove())}
+          onClick={() => dispatch(removeFrom())}
         >
           Decrement
         </button>

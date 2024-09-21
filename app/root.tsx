@@ -6,9 +6,9 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
-import store from './stores/generalStore'
 import "./tailwind.css";
 import { Provider } from "react-redux";
+import { setupStore } from "./stores/countreisStore";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -33,7 +33,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Provider store={store}>
+        <Provider store={setupStore()}>
 
           {children}
           <ScrollRestoration />

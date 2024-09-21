@@ -8,14 +8,13 @@ import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import store from './stores/generalStore'
+import { setupStore } from './stores/countreisStore'
 
 startTransition(() => {
   hydrateRoot(
     document,
     <StrictMode>
-      <Provider store={store}>
+      <Provider store={setupStore()} >
         <RemixBrowser />
       </Provider>
     </StrictMode>
