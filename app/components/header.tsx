@@ -1,12 +1,12 @@
 import { SyntheticEvent } from "react";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { selectCountryFrom, selectCountryTo, setFrom, setTo } from "../stores/countriesSlice";
+import { useAppDispatch } from "../hooks";
+import { setFrom, setTo } from "../stores/countriesSlice";
 import { Autocomplete, TextField } from '@mui/material';
+import data from '../../public/features.json';
 
 export default function Header() {
     const dispatch = useAppDispatch()
-    const countryFrom = useAppSelector(selectCountryFrom).value
-    const countryTo = useAppSelector(selectCountryTo).value
+    const options = data.objects.world.geometries.map(x => x.properties.name);
 
     return (
         <div>
@@ -14,9 +14,7 @@ export default function Header() {
             <div style={{ display: 'flex', justifyContent: "center", gap: '50px' }}>
                 <Autocomplete
                     data-testid="countryFrom-autocomplete"
-                    options={[
-                        'France',
-                        'Germany']}
+                    options={options}
                     style={{ width: '200px' }}
                     onChange={(event: SyntheticEvent, newValue: string | null) => {
                         dispatch(setFrom(newValue));
@@ -25,9 +23,7 @@ export default function Header() {
                 />
                 <Autocomplete
                     data-testid="countryTo-autocomplete"
-                    options={[
-                        'France',
-                        'Germany']}
+                    options={options}
                     style={{ width: '200px' }}
                     onChange={(event: SyntheticEvent, newValue: string | null) => {
                         dispatch(setTo(newValue));
@@ -35,8 +31,6 @@ export default function Header() {
                     renderInput={(params) => <TextField {...params} label="Country From" variant="filled" />}
                 />
             </div>
-            <p>From: {countryFrom}</p>
-            <p>To: {countryTo}</p>
         </div>
     )
 }
