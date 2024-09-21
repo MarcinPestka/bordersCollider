@@ -256,7 +256,7 @@
             "type": "Polygon",
             "arcs": [[203, 204, 205, 206, -70, 207]],
             "id": "CIV",
-            "properties": { "name": "Cote d'Ivoire" }
+            "properties": { "name": "Ivory Coast" }
           },
           {
             "type": "Polygon",
@@ -292,7 +292,7 @@
             "type": "Polygon",
             "arcs": [[-12, 227, 228, -216, -128, -225]],
             "id": "COG",
-            "properties": { "name": "Congo" }
+            "properties": { "name": "Republic of the Congo" }
           },
           {
             "type": "Polygon",
@@ -322,7 +322,7 @@
             "type": "Polygon",
             "arcs": [[-49, 241, 242, 243]],
             "id": "CZE",
-            "properties": { "name": "Czechia" }
+            "properties": { "name": "Czech Republic" }
           },
           {
             "type": "Polygon",
@@ -346,7 +346,7 @@
             "type": "MultiPolygon",
             "arcs": [[[257]]],
             "id": "GRL",
-            "properties": { "name": "Greenland" }
+            "properties": { "name": "Denmark" }
           },
           {
             "type": "Polygon",
@@ -420,7 +420,7 @@
             "type": "Polygon",
             "arcs": [[310, 311, 312, -112]],
             "id": "GUF",
-            "properties": { "name": "French Guiana" }
+            "properties": { "name": "France" }
           },
           {
             "type": "Polygon",
@@ -746,7 +746,7 @@
             "type": "Polygon",
             "arcs": [[487, -75, -384, -187, -456, 488]],
             "id": "MMR",
-            "properties": { "name": "Myanmar" }
+            "properties": { "name": "Myanmar (Burma)" }
           },
           {
             "type": "Polygon",
@@ -1015,7 +1015,7 @@
             "type": "Polygon",
             "arcs": [[-475, -264, -511, 622]],
             "id": "ESH",
-            "properties": { "name": "Western Sahara" }
+            "properties": { "name": "Morocco" }
           },
           {
             "type": "Polygon",
@@ -1101,7 +1101,7 @@
             "type": "Polygon",
             "arcs": [[656, -504]],
             "id": "SWZ",
-            "properties": { "name": "Eswatini" }
+            "properties": { "name": "Swaziland" }
           },
           {
             "type": "Polygon",
