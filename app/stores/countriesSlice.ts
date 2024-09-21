@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { RootState } from './countreisStore'
-import { Color } from '../services/mapAlgorythms';
+import { createSlice } from '@reduxjs/toolkit';
+import { Color } from '../services/mapAlgorithms';
+import { RootState } from './countriesStore';
 
 export const CountryFromSlice = createSlice({
   name: 'countryFrom',
@@ -40,11 +40,11 @@ const initialState: IssueInitialState = {
   value: []
 }
 
-export const AdjecentSlice = createSlice({
-  name: 'adjecent',
+export const AdjacentSlice = createSlice({
+  name: 'adjacent',
   initialState:initialState,
   reducers: {
-    setAdjecent: (state,action) => {
+    setAdjacent: (state,action) => {
       state.value = action.payload
     },
     reset: state => {
@@ -56,11 +56,11 @@ export const AdjecentSlice = createSlice({
 
 export const { setFrom, removeFrom } = CountryFromSlice.actions
 export const { setTo, removeTo } = CountryToSlice.actions
-export const { setAdjecent, reset } = AdjecentSlice.actions
+export const { setAdjacent, reset } = AdjacentSlice.actions
 
 export const selectCountryFrom = (state: RootState) => state.countryFrom
 export const selectCountryTo = (state: RootState) => state.countryTo
-export const selectAdjecent = (state: RootState) => state.adjecent
+export const selectAdjacent = (state: RootState) => state.adjacent
 export const CountryFromReducer = CountryFromSlice.reducer 
 export const CountryToReducer = CountryToSlice.reducer 
-export const AdjecentReducer = AdjecentSlice.reducer 
+export const AdjacentReducer = AdjacentSlice.reducer 

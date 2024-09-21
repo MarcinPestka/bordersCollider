@@ -1,9 +1,9 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import {AdjecentReducer, CountryFromReducer,CountryToReducer} from './countriesSlice'
+import { AdjacentReducer, CountryFromReducer, CountryToReducer } from './countriesSlice'
 const rootReducer = combineReducers({
     countryFrom: CountryFromReducer,
     countryTo: CountryToReducer,
-    adjecent: AdjecentReducer
+    adjacent: AdjacentReducer
   })
 
 export function setupStore(preloadedState?: Partial<RootState>) {

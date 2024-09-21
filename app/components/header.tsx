@@ -1,10 +1,9 @@
+import { Autocomplete, Button, TextField } from '@mui/material';
 import { SyntheticEvent } from "react";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { selectCountryFrom, selectCountryTo, setFrom, setTo, selectAdjecent, reset } from "../stores/countriesSlice";
-import { Autocomplete, TextField, Button } from '@mui/material';
 import data from '../../public/features.json';
-import { calculateBorder } from "~/services/mapAlgorythms";
-import { setAdjecent } from "../stores/countriesSlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { calculateBorder } from "../services/mapAlgorithms";
+import { reset, selectCountryFrom, selectCountryTo, setAdjacent, setFrom, setTo } from "../stores/countriesSlice";
 
 export default function Header() {
     const dispatch = useAppDispatch()
@@ -35,7 +34,7 @@ export default function Header() {
                     renderInput={(params) => <TextField {...params} label="Country From" variant="filled" />}
                 />
             </div>
-            <Button onClick={() => { dispatch(reset()); dispatch(setAdjecent(calculateBorder([{ geoName: countryFrom, step: 0 }], countryTo, 0))) }}>Elo</Button>
+            <Button onClick={() => { dispatch(reset()); dispatch(setAdjacent(calculateBorder([{ geoName: countryFrom, step: 0 }], countryTo, 0))) }}>Elo</Button>
         </div >
     )
 }

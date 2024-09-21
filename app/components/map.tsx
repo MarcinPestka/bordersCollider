@@ -1,11 +1,11 @@
-import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simple-maps"
-import { useAppSelector } from "../hooks";
-import { selectCountryFrom, selectCountryTo, selectAdjecent, setAdjecent } from "../stores/countriesSlice";
+import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simple-maps";
 import data from '../../public/features.json';
+import { useAppSelector } from "../hooks";
+import { selectAdjacent } from "../stores/countriesSlice";
 
 
 export default function Map() {
-    const adjecent = useAppSelector(selectAdjecent).value
+    const adjecent = useAppSelector(selectAdjacent).value
 
     function setColor(geoId: string) {
         switch (adjecent.find(x => x.geoName === geoId)?.step) {
