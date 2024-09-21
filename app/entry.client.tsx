@@ -7,12 +7,16 @@
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
 import { hydrateRoot } from "react-dom/client";
+import { Provider } from 'react-redux'
+import { setupStore } from './stores/countreisStore'
 
 startTransition(() => {
   hydrateRoot(
     document,
     <StrictMode>
-      <RemixBrowser />
+      <Provider store={setupStore()} >
+        <RemixBrowser />
+      </Provider>
     </StrictMode>
   );
 });
