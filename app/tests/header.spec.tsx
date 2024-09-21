@@ -1,7 +1,7 @@
-import { fireEvent, screen, within } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import { fillOutAutocomplete, renderWithProviders } from './test.utils'
 import Header from '../components/header'
-import { beforeEach, describe, expect, it, test } from 'vitest'
+import { describe, expect, it } from 'vitest'
 
 
 

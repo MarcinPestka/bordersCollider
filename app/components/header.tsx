@@ -1,6 +1,6 @@
-import type { MetaFunction } from "@remix-run/node";
+import { SyntheticEvent } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { removeFrom, selectCountryFrom, selectCountryTo, setFrom, setTo } from "../stores/countriesSlice";
+import { selectCountryFrom, selectCountryTo, setFrom, setTo } from "../stores/countriesSlice";
 import { Autocomplete, TextField } from '@mui/material';
 
 export default function Header() {
@@ -18,7 +18,7 @@ export default function Header() {
                         'France',
                         'Germany']}
                     style={{ width: '200px' }}
-                    onChange={(event: any, newValue: string | null) => {
+                    onChange={(event: SyntheticEvent, newValue: string | null) => {
                         dispatch(setFrom(newValue));
                     }}
                     renderInput={(params) => <TextField {...params} label="Country From" variant="filled" />}
@@ -29,7 +29,7 @@ export default function Header() {
                         'France',
                         'Germany']}
                     style={{ width: '200px' }}
-                    onChange={(event: any, newValue: string | null) => {
+                    onChange={(event: SyntheticEvent, newValue: string | null) => {
                         dispatch(setTo(newValue));
                     }}
                     renderInput={(params) => <TextField {...params} label="Country From" variant="filled" />}
