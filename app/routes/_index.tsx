@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useAppDispatch, useAppSelector } from "~/hooks";
-import { removeFrom, selectCountryFrom, setFrom } from "~/stores/countriesSlice";
+import { removeFrom, selectCountryFrom, setFrom } from "../stores/countriesSlice";
 import { TextField } from '@mui/material';
 import Header from "~/components/header";
 
@@ -16,9 +16,7 @@ export default function Counter() {
   const countryFrom = useAppSelector(selectCountryFrom).value
 
   return (
-    <div>
-      <Header />
-    </div>
+    <Header />
   )
 }
 

@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useAppDispatch, useAppSelector } from "~/hooks";
-import { removeFrom, selectCountryFrom, selectCountryTo, setFrom, setTo } from "~/stores/countriesSlice";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { removeFrom, selectCountryFrom, selectCountryTo, setFrom, setTo } from "../stores/countriesSlice";
 import { Autocomplete, TextField } from '@mui/material';
 
 export default function Header() {
@@ -13,6 +13,7 @@ export default function Header() {
             <h3 style={{ display: 'flex', justifyContent: "center" }}>Choose your countries</h3>
             <div style={{ display: 'flex', justifyContent: "center", gap: '50px' }}>
                 <Autocomplete
+                    data-testid="countryFrom-autocomplete"
                     options={[
                         'France',
                         'Germany']}
@@ -23,6 +24,7 @@ export default function Header() {
                     renderInput={(params) => <TextField {...params} label="Country From" variant="filled" />}
                 />
                 <Autocomplete
+                    data-testid="countryTo-autocomplete"
                     options={[
                         'France',
                         'Germany']}
