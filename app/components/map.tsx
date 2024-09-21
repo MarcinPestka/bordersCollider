@@ -1,14 +1,19 @@
 import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simple-maps";
 import data from '../../public/features.json';
 import { useAppSelector } from "../hooks";
-import { selectAdjacent } from "../stores/countriesSlice";
+import { selectAdjacent, selectCountryFrom, selectCountryTo } from "../stores/countriesSlice";
 
 
 export default function Map() {
-    const adjecent = useAppSelector(selectAdjacent).value
+    const adjacent = useAppSelector(selectAdjacent).value
+    const countryFrom = useAppSelector(selectCountryFrom).value
+    const countryTo = useAppSelector(selectCountryTo).value
 
     function setColor(geoId: string) {
-        switch (adjecent.find(x => x.geoName === geoId)?.step) {
+        if (geoId === countryFrom || geoId === countryTo) {
+            return '#dedede';
+        }
+        switch (adjacent.find(x => x.geoName === geoId)?.step) {
             case 0:
                 return '#81E366'
             case 1:
@@ -33,6 +38,22 @@ export default function Map() {
                 return '#DA7166'
             case 11:
                 return '#E36666'
+            case 12:
+                return '#E46060'
+            case 13:
+                return '#E65B5B'
+            case 14:
+                return '#E75555'
+            case 15:
+                return '#E85050'
+            case 16:
+                return '#EA4A4A'
+            case 17:
+                return '#EB4545'
+            case 18:
+                return '#ED3F3F'
+            case 19:
+                return '#EE3A3A'
             default:
                 return '#fff'
         }

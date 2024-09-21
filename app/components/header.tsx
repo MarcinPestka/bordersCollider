@@ -34,7 +34,7 @@ export default function Header() {
                     renderInput={(params) => <TextField {...params} label="Country From" variant="filled" />}
                 />
             </div>
-            <Button onClick={() => { dispatch(reset()); dispatch(setAdjacent(calculateBorder([{ geoName: countryFrom, step: 0 }], countryTo, 0))) }}>Elo</Button>
+            <Button onClick={async () => { dispatch(reset()); dispatch(setAdjacent(await calculateBorder([{ geoName: countryFrom, step: 0 }], countryTo, 0))) }}>Elo</Button>
         </div >
     )
 }

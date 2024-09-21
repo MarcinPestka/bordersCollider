@@ -9,9 +9,10 @@
   ],
   "Albania":[  
      "Greece",
-     "Macedonia",
+     "North Macedonia",
      "Montenegro",
-     "Serbia"
+     "Serbia",
+     "Kosovo"
   ],
   "Algeria":[  
      "Libya",
@@ -142,7 +143,7 @@
   ],
   "Bulgaria":[  
      "Greece",
-     "Macedonia",
+     "North Macedonia",
      "Romania",
      "Serbia",
      "Turkey"
@@ -378,7 +379,8 @@
   "Greece":[  
      "Albania",
      "Bulgaria",
-     "Macedonia",
+     "North Macedonia",
+     "Kosovo",
      "Turkey"
   ],
   "Grenada":[  
@@ -489,6 +491,7 @@
      "Saudi Arabia",
      "Syria"
   ],
+  "Kosovo":["North Macedonia","Albania","Montenegro","Serbia"],
   "Kazakhstan":[  
      "China",
      "Kyrgyzstan",
@@ -577,7 +580,7 @@
      "France",
      "Germany"
   ],
-  "Macedonia":[  
+  "North Macedonia":[  
      "Albania",
      "Bulgaria",
      "Greece",
@@ -646,7 +649,8 @@
      "Albania",
      "Bosnia and Herzegovina",
      "Croatia",
-     "Serbia"
+     "Serbia",
+     "Kosovo"
   ],
   "Morocco":[  
      "Algeria",
@@ -831,9 +835,10 @@
      "Bulgaria",
      "Croatia",
      "Hungary",
-     "Macedonia",
+     "North Macedonia",
      "Montenegro",
-     "Romania"
+     "Romania",
+     "Kosovo"
   ],
   "Seychelles":[  
 
