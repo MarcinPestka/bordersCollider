@@ -1,6 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { useAppDispatch, useAppSelector } from "~/hooks";
-import { removeFrom, selectCountryFrom, setFrom } from "~/stores/countriesSlice";
+import Header from "~/components/header";
 
 export const meta: MetaFunction = () => {
   return [
@@ -10,28 +9,8 @@ export const meta: MetaFunction = () => {
 };
 
 export default function Counter() {
-  const dispatch = useAppDispatch()
-  const countryFrom = useAppSelector(selectCountryFrom).value
-
   return (
-    <div>
-      <div>
-        <button
-          aria-label="Set France"
-          onClick={() => dispatch(setFrom('France'))}
-        >
-          Increment
-        </button>
-        <button
-          aria-label="Remove"
-          onClick={() => dispatch(removeFrom())}
-        >
-          Decrement
-        </button>
-        <br />
-        <span>From: {countryFrom}</span>
-      </div>
-    </div>
+    <Header />
   )
 }
 
