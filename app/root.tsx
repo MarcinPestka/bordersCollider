@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
@@ -36,7 +37,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
       </head>
       <body>
         <Provider store={store}>
-
           {children}
           <ScrollRestoration />
           <Scripts />
