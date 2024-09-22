@@ -1,4 +1,5 @@
 import { screen } from "@testing-library/react";
+import flushPromises from "flush-promises";
 import { describe, expect, it } from "vitest";
 import Map from "../components/map";
 import { calculateBorder } from "../services/mapAlgorithms";
@@ -25,7 +26,18 @@ describe("Map component behaves correctly", async () => {
       to: "Papua New Guinea",
       array: [
         { key: "United States", color: "#524DFF" },
-        { key: "Mexico", color: "#524DFF" },
+        { key: "Mexico", color: "#5651FF" },
+        { key: "Guatemala", color: "#5A56FF" },
+        { key: "Honduras", color: "#5F5AFF" },
+        { key: "Nicaragua", color: "#635EFF" },
+        { key: "Costa Rica", color: "#6762FF" },
+        { key: "Panama", color: "#6B67FF" },
+        { key: "Colombia", color: "#6F6BFF" },
+        // { key: "", color: "#" },
+        // { key: "", color: "#" },
+        // { key: "", color: "#" },
+        // { key: "", color: "#" },
+        // { key: "", color: "#" },
       ],
     },
   ])("Sets correct colors", async (testObject: test2) => {
@@ -40,7 +52,8 @@ describe("Map component behaves correctly", async () => {
         )
       )
     );
-    expect(
+    await flushPromises();
+    await expect(
       (await screen.findByTestId(testObject.from)).getAttribute("fill")
     ).toBe("#dedede");
     expect(
