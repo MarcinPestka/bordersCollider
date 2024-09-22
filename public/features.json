@@ -346,7 +346,7 @@
             "type": "MultiPolygon",
             "arcs": [[[257]]],
             "id": "GRL",
-            "properties": { "name": "Denmark" }
+            "properties": { "name": "Greenland" }
           },
           {
             "type": "Polygon",
@@ -420,7 +420,7 @@
             "type": "Polygon",
             "arcs": [[310, 311, 312, -112]],
             "id": "GUF",
-            "properties": { "name": "France" }
+            "properties": { "name": "French Guyana" }
           },
           {
             "type": "Polygon",
@@ -1015,7 +1015,7 @@
             "type": "Polygon",
             "arcs": [[-475, -264, -511, 622]],
             "id": "ESH",
-            "properties": { "name": "Morocco" }
+            "properties": { "name": "Western Sahara" }
           },
           {
             "type": "Polygon",
