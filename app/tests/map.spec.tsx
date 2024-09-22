@@ -1,5 +1,4 @@
 import { screen } from "@testing-library/react";
-import flushPromises from "flush-promises";
 import { describe, expect, it } from "vitest";
 import Map from "../components/map";
 import { calculateBorder } from "../services/mapAlgorithms";
@@ -52,7 +51,6 @@ describe("Map component behaves correctly", async () => {
         )
       )
     );
-    await flushPromises();
     await expect(
       (await screen.findByTestId(testObject.from)).getAttribute("fill")
     ).toBe("#dedede");
