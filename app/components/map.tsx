@@ -1,4 +1,4 @@
-import { ComposableMap, Geographies, Geography, ZoomableGroup } from "react-simple-maps";
+import { ComposableMap, Geographies, Geography, Graticule, ZoomableGroup } from "react-simple-maps";
 import data from '../../public/features.json';
 import { useAppSelector } from "../hooks";
 import { selectAdjacent, selectCountryFrom, selectCountryTo } from "../stores/countriesSlice";
@@ -15,45 +15,51 @@ export default function Map() {
         }
         switch (adjacent.find(x => x.geoName === geoId)?.step) {
             case 0:
-                return '#81E366'
+                return '#524DFF'
             case 1:
-                return '#8AD866'
+                return '#5651FF'
             case 2:
-                return '#93CC66'
+                return '#5A56FF'
             case 3:
-                return '#9CC166'
+                return '#5F5AFF'
             case 4:
-                return '#A5B666'
+                return '#635EFF'
             case 5:
-                return '#AEAA66'
+                return '#6762FF'
             case 6:
-                return '#B69F66'
+                return '#6B67FF'
             case 7:
-                return '#BF9366'
+                return '#6F6BFF'
             case 8:
-                return '#C88866'
+                return '#736FFF'
             case 9:
-                return '#D17D66'
+                return '#7873FF'
             case 10:
-                return '#DA7166'
+                return '#7C78FF'
             case 11:
-                return '#E36666'
+                return '#807CFF'
             case 12:
-                return '#E46060'
+                return '#8581FF'
             case 13:
-                return '#E65B5B'
+                return '#8A86FF'
             case 14:
-                return '#E75555'
+                return '#8F8CFF'
             case 15:
-                return '#E85050'
+                return '#9491FF'
             case 16:
-                return '#EA4A4A'
+                return '#9996FF'
             case 17:
-                return '#EB4545'
+                return '#9F9BFF'
             case 18:
-                return '#ED3F3F'
+                return '#A4A0FF'
             case 19:
-                return '#EE3A3A'
+                return '#A9A5FF'
+            case 20:
+                return '#AEABFF'
+            case 21:
+                return '#B3B0FF'
+            case 22:
+                return '#B8B5FF'
             default:
                 return '#fff'
         }
@@ -61,10 +67,14 @@ export default function Map() {
 
     return (
         <div style={{ justifyContent: 'center', display: 'flex' }} data-testid='wrapper'>
-            <div style={{ width: '60%', justifyContent: 'center' }}>
+            <div style={{ width: '100%', justifyContent: 'center' }}>
 
-                <ComposableMap data-testid='composableMap'>
-                    <ZoomableGroup center={[0, 0]} zoom={1}>
+                <ComposableMap data-testid='composableMap' width={400} height={200} projectionConfig={{
+                    scale: 70,
+                }}>
+                    <ZoomableGroup center={[10, 50]} zoom={1}>
+
+                        <Graticule stroke="#EAEAEC" strokeWidth={0.2} />
                         <Geographies geography={data}>
                             {({ geographies }) =>
                                 geographies.map((geo) => (

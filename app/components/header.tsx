@@ -12,8 +12,8 @@ export default function Header() {
     const countryTo = useAppSelector(selectCountryTo).value
 
     return (
-        <div>
-            <h3 style={{ display: 'flex', justifyContent: "center" }}>Choose your countries</h3>
+        <div style={{ display: 'flex', alignItems: "center", flexDirection: 'column', gap: '16px' }}>
+            <h3>Choose your countries</h3>
             <div style={{ display: 'flex', justifyContent: "center", gap: '50px' }}>
                 <Autocomplete
                     data-testid="countryFrom-autocomplete"
@@ -34,8 +34,8 @@ export default function Header() {
                     renderInput={(params) => <TextField {...params} label="Country From" variant="filled" />}
                 />
             </div>
-            <Button onClick={async () => { dispatch(reset()); dispatch(setAdjacent(await calculateBorder([{ geoName: countryFrom, step: 0 }], countryTo, 0))) }}>Elo</Button>
-        </div >
+            <Button style={{ width: '200px', display: 'flex', justifyContent: "center" }} onClick={async () => { dispatch(reset()); dispatch(setAdjacent(await calculateBorder([{ geoName: countryFrom, step: 0 }], countryTo, 0))) }}>Calculate</Button>
+        </ div >
     )
 }
 
