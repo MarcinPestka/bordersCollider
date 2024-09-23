@@ -1,6 +1,6 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
 import { SyntheticEvent, useState } from "react";
-import data from "../../public/features.json";
+import data from "../../features.json";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { calculateBorder } from "../services/mapAlgorithms";
 

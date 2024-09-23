@@ -1,4 +1,4 @@
-import data from "../../public/country_adj.json";
+import data from "../../country_adj.json";
 import { store } from "../root";
 import { setAdjacent } from "../stores/countriesSlice";
 

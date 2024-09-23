@@ -5,7 +5,7 @@ import {
   Geography,
   ZoomableGroup,
 } from "react-simple-maps";
-import data from "../../public/features.json";
+import data from "../../features.json";
 import { useAppSelector } from "../hooks";
 import {
   selectAdjacent,
