@@ -23,7 +23,7 @@ export default function Header() {
     <div
       id="test"
       style={{
-        marginTop: "20px",
+        paddingTop: "20px",
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
@@ -34,6 +34,7 @@ export default function Header() {
       <div style={{ display: "flex", justifyContent: "center", gap: "50px" }}>
         <Autocomplete
           data-testid="countryFrom-autocomplete"
+          disabled={disabled}
           options={options}
           style={{ width: "200px" }}
           value={countryFrom}
@@ -46,6 +47,7 @@ export default function Header() {
         />
         <Autocomplete
           data-testid="countryTo-autocomplete"
+          disabled={disabled}
           options={options}
           style={{ width: "200px" }}
           value={countryTo}
