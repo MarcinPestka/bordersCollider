@@ -43,7 +43,7 @@ export default function Map() {
   }, []);
 
   function setColor(geoId: string): string {
-    const saturation = 0.1;
+    const saturation = 0.05;
 
     const adjacencyStep = store
       .getState()
