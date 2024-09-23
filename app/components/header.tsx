@@ -6,7 +6,6 @@ import { calculateBorder } from "../services/mapAlgorithms";
 
 import {
   reset,
-  selectAdjacent,
   selectCountryFrom,
   selectCountryTo,
   setAdjacent,
@@ -17,7 +16,6 @@ import {
 export default function Header() {
   const dispatch = useAppDispatch();
   const options = data.objects.world.geometries.map((x) => x.properties.name);
-  const adj = useAppSelector(selectAdjacent).value;
   const countryFrom = useAppSelector(selectCountryFrom).value;
   const countryTo = useAppSelector(selectCountryTo).value;
   const [disabled, setDisabled] = useState(false);
@@ -75,7 +73,6 @@ export default function Header() {
             )
           );
           setDisabled(false);
-          console.log(adj);
         }}
       >
         {disabled ? "Calculating..." : "Calculate"}

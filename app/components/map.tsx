@@ -7,6 +7,7 @@ import {
 } from "react-simple-maps";
 import data from "../../features.json";
 import { useAppSelector } from "../hooks";
+import { store } from "../root";
 import {
   selectAdjacent,
   selectCountryFrom,
@@ -41,60 +42,18 @@ export default function Map() {
     }
   }, []);
 
-  function setColor(geoId: string) {
+  function setColor(geoId: string): string {
+    const saturation = 0.1;
+
+    const adjacencyStep = store
+      .getState()
+      .adjacent.value.find((x) => x.geoName === geoId)?.step;
     if (geoId === countryFrom || geoId === countryTo) {
       return "#dedede";
+    } else if (adjacencyStep !== undefined) {
+      return `rgba(79, 104, 247, ${1 - saturation * adjacencyStep})`;
     }
-    switch (adjacent.find((x) => x.geoName === geoId)?.step) {
-      case 0:
-        return "#524DFF";
-      case 1:
-        return "#5651FF";
-      case 2:
-        return "#5A56FF";
-      case 3:
-        return "#5F5AFF";
-      case 4:
-        return "#635EFF";
-      case 5:
-        return "#6762FF";
-      case 6:
-        return "#6B67FF";
-      case 7:
-        return "#6F6BFF";
-      case 8:
-        return "#736FFF";
-      case 9:
-        return "#7873FF";
-      case 10:
-        return "#7C78FF";
-      case 11:
-        return "#807CFF";
-      case 12:
-        return "#8581FF";
-      case 13:
-        return "#8A86FF";
-      case 14:
-        return "#8F8CFF";
-      case 15:
-        return "#9491FF";
-      case 16:
-        return "#9996FF";
-      case 17:
-        return "#9F9BFF";
-      case 18:
-        return "#A4A0FF";
-      case 19:
-        return "#A9A5FF";
-      case 20:
-        return "#AEABFF";
-      case 21:
-        return "#B3B0FF";
-      case 22:
-        return "#B8B5FF";
-      default:
-        return "#fff";
-    }
+    return "#fff";
   }
 
   return (
