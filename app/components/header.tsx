@@ -1,5 +1,5 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
-import { SyntheticEvent, useState } from "react";
+import { useState } from "react";
 import data from "../../features.json";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { calculateBorder } from "../services/mapAlgorithms";
@@ -36,8 +36,8 @@ export default function Header() {
           data-testid="countryFrom-autocomplete"
           options={options}
           style={{ width: "200px" }}
-          defaultValue={countryFrom}
-          onChange={(event: SyntheticEvent, newValue: string | null) => {
+          value={countryFrom}
+          onChange={(_, newValue: string | null) => {
             dispatch(setFrom(newValue));
           }}
           renderInput={(params) => (
@@ -48,8 +48,8 @@ export default function Header() {
           data-testid="countryTo-autocomplete"
           options={options}
           style={{ width: "200px" }}
-          defaultValue={countryTo}
-          onChange={(event: SyntheticEvent, newValue: string | null) => {
+          value={countryTo}
+          onChange={(_, newValue: string | null) => {
             dispatch(setTo(newValue));
           }}
           renderInput={(params) => (

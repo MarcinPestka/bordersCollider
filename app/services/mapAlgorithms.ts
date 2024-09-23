@@ -40,7 +40,7 @@ export async function calculateBorder(
       )
     );
     store.dispatch(setAdjacent(tempAdjacent));
-    await timeout(200);
+    await timeout(300);
     adjacentArray.push(
       ...(await calculateBorder(adjacentArray, searchFor, step))
     );
