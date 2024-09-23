@@ -29,6 +29,9 @@ module.exports = {
     {
       files: ["**/*.{js,jsx,ts,tsx}"],
       plugins: ["react", "jsx-a11y"],
+      rules: {
+        "max-len": ["error", { code: 80 }],
+      },
       extends: [
         "plugin:react/recommended",
         "plugin:react/jsx-runtime",
@@ -55,6 +58,9 @@ module.exports = {
       files: ["**/*.{ts,tsx}"],
       plugins: ["@typescript-eslint", "import"],
       parser: "@typescript-eslint/parser",
+      rules: {
+        "max-len": ["error", { code: 80 }],
+      },
       settings: {
         "import/internal-regex": "^~/",
         "import/resolver": {
@@ -70,6 +76,7 @@ module.exports = {
         "plugin:@typescript-eslint/recommended",
         "plugin:import/recommended",
         "plugin:import/typescript",
+        "prettier",
       ],
     },
 

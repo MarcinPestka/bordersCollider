@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
   Meta,
@@ -5,10 +7,9 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import type { LinksFunction } from "@remix-run/node";
-import "./tailwind.css";
 import { Provider } from "react-redux";
-import { setupStore } from "./stores/countreisStore";
+import { setupStore } from "./stores/countriesStore";
+import "./tailwind.css";
 
 export const links: LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -23,6 +24,8 @@ export const links: LinksFunction = () => [
   },
 ];
 
+export const store = setupStore();
+
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
@@ -33,8 +36,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <Provider store={setupStore()}>
-
+        <Provider store={store}>
           {children}
           <ScrollRestoration />
           <Scripts />
