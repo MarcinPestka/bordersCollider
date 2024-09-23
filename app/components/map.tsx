@@ -8,14 +8,9 @@ import {
 import data from "../../features.json";
 import { useAppSelector } from "../hooks";
 import { store } from "../root";
-import {
-  selectAdjacent,
-  selectCountryFrom,
-  selectCountryTo,
-} from "../stores/countriesSlice";
+import { selectCountryFrom, selectCountryTo } from "../stores/countriesSlice";
 
 export default function Map() {
-  const adjacent = useAppSelector(selectAdjacent).value;
   const countryFrom = useAppSelector(selectCountryFrom).value;
   const countryTo = useAppSelector(selectCountryTo).value;
   const [height, setHeight] = useState(200);
