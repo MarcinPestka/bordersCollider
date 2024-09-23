@@ -7,10 +7,14 @@ import {
 } from "react-simple-maps";
 import data from "../../features.json";
 import { useAppSelector } from "../hooks";
-import { store } from "../root";
-import { selectCountryFrom, selectCountryTo } from "../stores/countriesSlice";
+import {
+  selectAdjacent,
+  selectCountryFrom,
+  selectCountryTo,
+} from "../stores/countriesSlice";
 
 export default function Map() {
+  const adjacent = useAppSelector(selectAdjacent).value;
   const countryFrom = useAppSelector(selectCountryFrom).value;
   const countryTo = useAppSelector(selectCountryTo).value;
   const [height, setHeight] = useState(200);
@@ -40,9 +44,7 @@ export default function Map() {
   function setColor(geoId: string): string {
     const saturation = 0.05;
 
-    const adjacencyStep = store
-      .getState()
-      .adjacent.value.find((x) => x.geoName === geoId)?.step;
+    const adjacencyStep = adjacent.find((x) => x.geoName === geoId)?.step;
     if (geoId === countryFrom || geoId === countryTo) {
       return "#dedede";
     } else if (adjacencyStep !== undefined) {
