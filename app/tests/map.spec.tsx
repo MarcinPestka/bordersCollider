@@ -1,5 +1,6 @@
 import { screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
+import { ZoomableGroupProps } from "react-simple-maps";
+import { describe, expect, it, vi } from "vitest";
 import Map from "../components/map";
 import { calculateBorder } from "../services/mapAlgorithms";
 import { setAdjacent, setFrom, setTo } from "../stores/countriesSlice";
@@ -17,8 +18,15 @@ interface test2 {
 }
 
 describe("Map component behaves correctly", async () => {
+  vi.mock("react-simple-maps", async () => {
+    return {
+      ...(await vi.importActual("react-simple-maps")),
+      ZoomableGroup: ({ children }: ZoomableGroupProps): JSX.Element => (
+        <>{children}</>
+      ),
+    };
+  });
   const { store } = renderWithProviders(<Map />);
-
   it.each([
     {
       from: "Canada",

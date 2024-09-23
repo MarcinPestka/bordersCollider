@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import {
   ComposableMap,
   Geographies,
@@ -16,6 +17,26 @@ export default function Map() {
   const adjacent = useAppSelector(selectAdjacent).value;
   const countryFrom = useAppSelector(selectCountryFrom).value;
   const countryTo = useAppSelector(selectCountryTo).value;
+  const [height, setHeight] = useState(200);
+  const [zoom, SetZoom] = useState(2);
+  const [coords, SetCoords] = useState(0);
+  useEffect(() => {
+    setHeight(window.innerHeight - 210);
+    switch (true) {
+      case window.innerWidth <= 768:
+        SetCoords(155);
+        SetZoom(3);
+        break;
+      case window.innerWidth <= 1400:
+        SetCoords(155);
+        SetZoom(2);
+        break;
+      default:
+        SetCoords(0);
+        SetZoom(1.2);
+        break;
+    }
+  }, []);
 
   function setColor(geoId: string) {
     if (geoId === countryFrom || geoId === countryTo) {
@@ -79,8 +100,15 @@ export default function Map() {
       data-testid="wrapper"
     >
       <div style={{ width: "100%", justifyContent: "center" }}>
-        <ComposableMap data-testid="composableMap">
-          <ZoomableGroup center={[0, 0]} zoom={1}>
+        <ComposableMap
+          data-testid="composableMap"
+          style={{
+            width: "100%",
+            height: height,
+            flexGrow: "1",
+          }}
+        >
+          <ZoomableGroup center={[0, coords]} zoom={zoom}>
             <Geographies geography={data}>
               {({ geographies }) =>
                 geographies.map((geo) => (
