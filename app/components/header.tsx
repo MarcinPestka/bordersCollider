@@ -1,5 +1,5 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
-import { SyntheticEvent } from "react";
+import { SyntheticEvent, useState } from "react";
 import data from "../../public/features.json";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { calculateBorder } from "../services/mapAlgorithms";
@@ -18,22 +18,25 @@ export default function Header() {
   const options = data.objects.world.geometries.map((x) => x.properties.name);
   const countryFrom = useAppSelector(selectCountryFrom).value;
   const countryTo = useAppSelector(selectCountryTo).value;
-
+  const [disabled, setDisabled] = useState(false);
   return (
     <div
+      id="test"
       style={{
+        marginTop: "20px",
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
         gap: "16px",
       }}
     >
-      <h3>Choose your countries</h3>
+      <span>Choose your countries</span>
       <div style={{ display: "flex", justifyContent: "center", gap: "50px" }}>
         <Autocomplete
           data-testid="countryFrom-autocomplete"
           options={options}
           style={{ width: "200px" }}
+          defaultValue={countryFrom}
           onChange={(event: SyntheticEvent, newValue: string | null) => {
             dispatch(setFrom(newValue));
           }}
@@ -45,6 +48,7 @@ export default function Header() {
           data-testid="countryTo-autocomplete"
           options={options}
           style={{ width: "200px" }}
+          defaultValue={countryTo}
           onChange={(event: SyntheticEvent, newValue: string | null) => {
             dispatch(setTo(newValue));
           }}
@@ -54,8 +58,10 @@ export default function Header() {
         />
       </div>
       <Button
+        disabled={disabled}
         style={{ width: "200px", display: "flex", justifyContent: "center" }}
         onClick={async () => {
+          setDisabled(true);
           dispatch(reset());
           dispatch(
             setAdjacent(
@@ -66,9 +72,10 @@ export default function Header() {
               )
             )
           );
+          setDisabled(false);
         }}
       >
-        Calculate
+        {disabled ? "Calculating..." : "Calculate"}
       </Button>
     </div>
   );

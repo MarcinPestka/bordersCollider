@@ -21,7 +21,10 @@ export default function Map() {
   const [zoom, SetZoom] = useState(2);
   const [coords, SetCoords] = useState(0);
   useEffect(() => {
-    setHeight(window.innerHeight - 210);
+    setHeight(
+      window.innerHeight -
+        (document.getElementById("test")?.clientHeight || 210)
+    );
     switch (true) {
       case window.innerWidth <= 768:
         SetCoords(155);
