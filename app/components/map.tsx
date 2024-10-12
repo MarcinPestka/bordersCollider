@@ -1,8 +1,10 @@
+import { CircularProgress } from "@mui/material";
 import { useEffect, useState } from "react";
 import {
   ComposableMap,
   Geographies,
   Geography,
+  Graticule,
   ZoomableGroup,
 } from "react-simple-maps";
 import data from "../../features.json";
@@ -17,12 +19,11 @@ export default function Map() {
   const adjacent = useAppSelector(selectAdjacent).value;
   const countryFrom = useAppSelector(selectCountryFrom).value;
   const countryTo = useAppSelector(selectCountryTo).value;
-  const [height, setHeight] = useState(200);
-  const [zoom, SetZoom] = useState(2);
-  const [coords, SetCoords] = useState(0);
+  const [height, setHeight] = useState<number | undefined>(undefined);
+  const [zoom, SetZoom] = useState<number | undefined>(undefined);
+  const [coords, SetCoords] = useState<number | undefined>(undefined);
   useEffect(() => {
-    const height = document.getElementById("test")?.clientHeight;
-    setHeight(window.innerHeight - (height ? height + 30 : 210));
+    setHeight(window.innerHeight);
     switch (true) {
       case window.innerWidth <= 768:
         SetCoords(155);
@@ -51,7 +52,11 @@ export default function Map() {
     return "#fff";
   }
 
-  return (
+  return !height && !zoom && !coords ? (
+    <div style={{ position: "absolute", marginLeft: "50%", marginTop: "30%" }}>
+      <CircularProgress />
+    </div>
+  ) : (
     <div
       style={{ justifyContent: "center", display: "flex" }}
       data-testid="wrapper"
@@ -65,8 +70,9 @@ export default function Map() {
             flexGrow: "1",
           }}
         >
-          <ZoomableGroup center={[0, coords]} zoom={zoom}>
-            <Geographies geography={data}>
+          <ZoomableGroup center={[0, coords || 0]} zoom={zoom}>
+            <Graticule stroke="#d1d1d1" />
+            <Geographies geography={data} style={{ backgroundColor: "red" }}>
               {({ geographies }) =>
                 geographies.map((geo) => (
                   <Geography
