@@ -46,7 +46,9 @@ export default function Map() {
     const saturation = 0.05;
     if (adjacent && adjacent.length) {
       const adjacencyStep = adjacent.find((x) => x.geoName === geoId)?.step;
-      if (adjacencyStep !== undefined) {
+      if (geoId === countryFrom || geoId === countryTo) {
+        return "#dedede";
+      } else if (adjacencyStep !== undefined) {
         return `rgba(79, 104, 247, ${1 - saturation * adjacencyStep})`;
       }
     }
@@ -59,9 +61,7 @@ export default function Map() {
         return "red";
       }
     }
-    if (geoId === countryFrom || geoId === countryTo) {
-      return "#dedede";
-    }
+
     return "#fff";
   }
 

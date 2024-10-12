@@ -10,16 +10,13 @@ import {
 import {
   reset,
   resetVisited,
-  selectAdjacent,
   selectCountryFrom,
   selectCountryTo,
   setAdjacent,
   setFrom,
   setTo,
 } from "../stores/countriesSlice";
-
 export default function Header() {
-  const adjacent = useAppSelector(selectAdjacent).value;
   const dispatch = useAppDispatch();
   const options = data.objects.world.geometries.map((x) => x.properties.name);
   const countryFrom = useAppSelector(selectCountryFrom).value;
