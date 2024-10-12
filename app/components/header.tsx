@@ -28,9 +28,17 @@ export default function Header() {
         alignItems: "center",
         flexDirection: "column",
         gap: "16px",
+        position: "absolute",
+        left: "0px",
+        right: "0px",
+        marginInline: "auto",
+        width: "fit-content",
+        backgroundColor: "#ededed80",
+        borderRadius: "3%",
+        padding: "20px",
       }}
     >
-      <span>Choose your countries</span>
+      <h4>Choose your countries</h4>
       <div style={{ display: "flex", justifyContent: "center", gap: "50px" }}>
         <Autocomplete
           data-testid="countryFrom-autocomplete"
@@ -39,6 +47,7 @@ export default function Header() {
           style={{ width: "200px" }}
           value={countryFrom}
           onChange={(_, newValue: string | null) => {
+            dispatch(reset());
             dispatch(setFrom(newValue));
           }}
           renderInput={(params) => (
@@ -52,6 +61,7 @@ export default function Header() {
           style={{ width: "200px" }}
           value={countryTo}
           onChange={(_, newValue: string | null) => {
+            dispatch(reset());
             dispatch(setTo(newValue));
           }}
           renderInput={(params) => (
