@@ -102,12 +102,13 @@ export default function Header() {
       >
         {disabled ? "Calculating..." : "Calculate"}
       </Button>
-      {adjacent.length > 0&& (
+      {adjacent && adjacent.length > 0 && (
         <Button
           disabled={disabled}
           style={{ width: "200px", display: "flex", justifyContent: "center" }}
           onClick={async () => {
             setDisabled(true);
+            dispatch(reset());
             dispatch(resetVisited());
             dispatch(
               setAdjacent(
