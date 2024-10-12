@@ -10,13 +10,16 @@ import {
 import {
   reset,
   resetVisited,
+  selectAdjacent,
   selectCountryFrom,
   selectCountryTo,
   setAdjacent,
   setFrom,
   setTo,
 } from "../stores/countriesSlice";
+
 export default function Header() {
+  const adjacent = useAppSelector(selectAdjacent).value;
   const dispatch = useAppDispatch();
   const options = data.objects.world.geometries.map((x) => x.properties.name);
   const countryFrom = useAppSelector(selectCountryFrom).value;
@@ -99,21 +102,28 @@ export default function Header() {
       >
         {disabled ? "Calculating..." : "Calculate"}
       </Button>
-      <Button
-        disabled={disabled}
-        style={{ width: "200px", display: "flex", justifyContent: "center" }}
-        onClick={async () => {
-          setDisabled(true);
-          dispatch(reset());
-          dispatch(resetVisited());
-          dispatch(
-            setAdjacent(await calculateShortestPath(countryFrom, countryTo, 2))
-          );
-          setDisabled(false);
-        }}
-      >
-        Show shortest route
-      </Button>
+      {adjacent.length > 0&& (
+        <Button
+          disabled={disabled}
+          style={{ width: "200px", display: "flex", justifyContent: "center" }}
+          onClick={async () => {
+            setDisabled(true);
+            dispatch(resetVisited());
+            dispatch(
+              setAdjacent(
+                await calculateShortestPath(
+                  countryFrom,
+                  countryTo,
+                  adjacent[adjacent.length - 1].step + 1
+                )
+              )
+            );
+            setDisabled(false);
+          }}
+        >
+          Show shortest route
+        </Button>
+      )}
     </div>
   );
 }
