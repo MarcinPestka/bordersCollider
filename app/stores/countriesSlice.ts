@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { Color } from "../services/mapAlgorithms";
+import { AlgoStep } from "../services/mapAlgorithms";
 import { RootState } from "./countriesStore";
 
 export const CountryFromSlice = createSlice({
@@ -33,7 +33,7 @@ export const CountryToSlice = createSlice({
 });
 
 export interface IssueInitialState {
-  value: Color[];
+  value: AlgoStep[];
 }
 const initialState: IssueInitialState = {
   value: [],
@@ -46,6 +46,12 @@ export const AdjacentSlice = createSlice({
     setAdjacent: (state, action) => {
       state.value = action.payload;
     },
+    popRoute: (state) => {
+      state.value.pop();
+    },
+    appendRoute: (state, action) => {
+      state.value = [...state.value, action.payload];
+    },
     reset: (state) => {
       state.value = [];
     },
@@ -54,11 +60,13 @@ export const AdjacentSlice = createSlice({
 
 export const { setFrom, removeFrom } = CountryFromSlice.actions;
 export const { setTo, removeTo } = CountryToSlice.actions;
-export const { setAdjacent, reset } = AdjacentSlice.actions;
+export const { setAdjacent, appendRoute, reset, popRoute } =
+  AdjacentSlice.actions;
 
 export const selectCountryFrom = (state: RootState) => state.countryFrom;
 export const selectCountryTo = (state: RootState) => state.countryTo;
 export const selectAdjacent = (state: RootState) => state.adjacent;
+
 export const CountryFromReducer = CountryFromSlice.reducer;
 export const CountryToReducer = CountryToSlice.reducer;
 export const AdjacentReducer = AdjacentSlice.reducer;

@@ -42,13 +42,15 @@ export default function Map() {
 
   function setColor(geoId: string): string {
     const saturation = 0.05;
-
-    const adjacencyStep = adjacent.find((x) => x.geoName === geoId)?.step;
-    if (geoId === countryFrom || geoId === countryTo) {
-      return "#dedede";
-    } else if (adjacencyStep !== undefined) {
-      return `rgba(79, 104, 247, ${1 - saturation * adjacencyStep})`;
+    if (adjacent.length) {
+      const adjacencyStep = adjacent.find((x) => x.geoName === geoId)?.step;
+      if (geoId === countryFrom || geoId === countryTo) {
+        return "#dedede";
+      } else if (adjacencyStep !== undefined) {
+        return `rgba(79, 104, 247, ${1 - saturation * adjacencyStep})`;
+      }
     }
+
     return "#fff";
   }
 
