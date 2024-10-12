@@ -39,7 +39,14 @@ export default function Header() {
       }}
     >
       <h4>Choose your countries</h4>
-      <div style={{ display: "flex", justifyContent: "center", gap: "50px" }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "50px",
+          flexWrap: "wrap",
+        }}
+      >
         <Autocomplete
           data-testid="countryFrom-autocomplete"
           disabled={disabled}
