@@ -9,6 +9,7 @@ import {
 
 import {
   reset,
+  resetVisited,
   selectAdjacent,
   selectCountryFrom,
   selectCountryTo,
@@ -105,10 +106,13 @@ export default function Header() {
         disabled={disabled}
         style={{ width: "200px", display: "flex", justifyContent: "center" }}
         onClick={async () => {
+          setDisabled(true);
           dispatch(reset());
+          dispatch(resetVisited());
           dispatch(
-            setAdjacent(await calculateShortestPath("Poland", "Spain", 3))
+            setAdjacent(await calculateShortestPath(countryFrom, countryTo, 2))
           );
+          setDisabled(false);
         }}
       >
         Show shortest route

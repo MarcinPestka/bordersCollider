@@ -2,8 +2,8 @@ import data from "../../country_adj.json";
 import { store } from "../root";
 import {
   appendRoute,
+  appendVisited,
   popRoute,
-  reset,
   setAdjacent,
 } from "../stores/countriesSlice";
 
@@ -65,36 +65,29 @@ export async function calculateShortestPath(
   maxSteps: number,
   visited: AlgoStep[] = [{ geoName: searchFrom, step: 0 }]
 ) {
-  console.log(maxSteps);
   if (maxSteps === 0) {
-    store.dispatch(popRoute());
-    return;
+    return undefined;
   }
+
   const step = maxSteps - 1;
   const adjacentArray: AlgoStep[] = [];
-
   adjacentArray.push(...GetNotVisited(searchFrom, step, visited));
   visited = [...visited, ...adjacentArray];
   for (const adjacent of adjacentArray) {
-    console.log(adjacent.geoName);
+    if (adjacent.geoName === searchTo) {
+      store.dispatch(appendVisited(store.getState().adjacent.value));
+    }
     store.dispatch(appendRoute(adjacent));
-    await timeout(500);
-    await calculateShortestPath(adjacent.geoName, searchTo, step, visited);
-
-    console.log(GetNotVisited(adjacent.geoName, step, visited));
+    await timeout(10);
+    if (
+      (await calculateShortestPath(
+        adjacent.geoName,
+        searchTo,
+        step,
+        visited
+      )) === undefined
+    ) {
+      store.dispatch(popRoute());
+    }
   }
-  // for (const adjacent of adjacentArray) {
-  //   if (adjacentArray.some((x) => x.geoName === searchTo)) {
-  //     console.log("FOUND IT");
-  //     break;
-  //   }
-  //   // store.dispatch(appendRoute(adjacent));
-  //   // await timeout(300);
-  //   // await calculateShortestPath(adjacent.geoName, searchTo, step, visited);
-
-  //   // console.log("THIS SHIT ENDED");
-  // }
-  store.dispatch(reset());
-  // console.log("WHEN DOES THIS TRIGGER");
-  return adjacentArray;
 }

@@ -5,7 +5,7 @@ import { RootState } from "./countriesStore";
 export const CountryFromSlice = createSlice({
   name: "countryFrom",
   initialState: {
-    value: "Spain",
+    value: "Poland",
   },
   reducers: {
     setFrom: (state, action) => {
@@ -20,7 +20,7 @@ export const CountryFromSlice = createSlice({
 export const CountryToSlice = createSlice({
   name: "countryTo",
   initialState: {
-    value: "Canada",
+    value: "France",
   },
   reducers: {
     setTo: (state, action) => {
@@ -47,7 +47,7 @@ export const AdjacentSlice = createSlice({
       state.value = action.payload;
     },
     popRoute: (state) => {
-      state.value.pop();
+      state.value = [...state.value.slice(0, -1)];
     },
     appendRoute: (state, action) => {
       state.value = [...state.value, action.payload];
@@ -58,15 +58,32 @@ export const AdjacentSlice = createSlice({
   },
 });
 
+export const VisitedSlice = createSlice({
+  name: "routes",
+  initialState: initialState,
+  reducers: {
+    appendVisited: (state, action) => {
+      console.log(action.payload);
+      state.value = [...state.value, ...action.payload];
+    },
+    resetVisited: (state) => {
+      state.value = [];
+    },
+  },
+});
+
 export const { setFrom, removeFrom } = CountryFromSlice.actions;
 export const { setTo, removeTo } = CountryToSlice.actions;
 export const { setAdjacent, appendRoute, reset, popRoute } =
   AdjacentSlice.actions;
+export const { appendVisited, resetVisited } = VisitedSlice.actions;
 
 export const selectCountryFrom = (state: RootState) => state.countryFrom;
 export const selectCountryTo = (state: RootState) => state.countryTo;
 export const selectAdjacent = (state: RootState) => state.adjacent;
+export const selectVisited = (state: RootState) => state.visited;
 
 export const CountryFromReducer = CountryFromSlice.reducer;
 export const CountryToReducer = CountryToSlice.reducer;
 export const AdjacentReducer = AdjacentSlice.reducer;
+export const VisitedReducer = VisitedSlice.reducer;
