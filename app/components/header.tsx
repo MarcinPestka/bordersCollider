@@ -61,10 +61,11 @@ export default function Header() {
           value={countryFrom}
           onChange={(_, newValue: string | null) => {
             dispatch(reset());
+            dispatch(resetVisited());
             dispatch(setFrom(newValue));
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Country From" variant="filled" />
+            <TextField {...params} label="Country From" variant="standard" />
           )}
         />
         <Autocomplete
@@ -75,10 +76,11 @@ export default function Header() {
           value={countryTo}
           onChange={(_, newValue: string | null) => {
             dispatch(reset());
+            dispatch(resetVisited());
             dispatch(setTo(newValue));
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Country From" variant="filled" />
+            <TextField {...params} label="Country From" variant="standard" />
           )}
         />
       </div>
@@ -122,7 +124,7 @@ export default function Header() {
             setDisabled(false);
           }}
         >
-          Show shortest route
+          Brute force shortest route
         </Button>
       )}
     </div>

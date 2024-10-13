@@ -59,7 +59,7 @@ export default function Map() {
         countryFrom === geoId ||
         countryTo === geoId
       ) {
-        return "red";
+        return "#7858b0";
       }
     }
 
