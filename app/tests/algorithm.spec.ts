@@ -3,6 +3,7 @@ import { store } from "../root";
 import { calculateShortestPath } from "../services/mapAlgorithms";
 import { resetVisited } from "../stores/countriesSlice";
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 vi.spyOn(globalThis, "setTimeout").mockImplementation((fn: () => any) => {
   return fn();
 });
@@ -79,7 +80,6 @@ describe("Shortes route brute force works", () => {
     },
   ])("Sets from country correctly", async (values) => {
     await calculateShortestPath(values.from, values.to, values.steps);
-
     expect(store.getState().visited.value).toEqual(values.result);
   });
 });
