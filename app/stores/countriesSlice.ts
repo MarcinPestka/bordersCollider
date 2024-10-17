@@ -59,11 +59,10 @@ export const AdjacentSlice = createSlice({
 });
 
 export const VisitedSlice = createSlice({
-  name: "routes",
+  name: "visited",
   initialState: initialState,
   reducers: {
     appendVisited: (state, action) => {
-      console.log(action.payload);
       state.value = [...state.value, ...action.payload];
     },
     resetVisited: (state) => {

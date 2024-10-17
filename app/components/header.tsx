@@ -85,6 +85,7 @@ export default function Header() {
         />
       </div>
       <Button
+        data-testid="calculateBorder-button"
         disabled={disabled}
         style={{ width: "200px", display: "flex", justifyContent: "center" }}
         onClick={async () => {
@@ -106,20 +107,17 @@ export default function Header() {
       </Button>
       {adjacent && adjacent.length > 0 && (
         <Button
+          data-testid="bruteForce-button"
           disabled={disabled}
           style={{ width: "200px", display: "flex", justifyContent: "center" }}
           onClick={async () => {
             setDisabled(true);
             dispatch(reset());
             dispatch(resetVisited());
-            dispatch(
-              setAdjacent(
-                await calculateShortestPath(
-                  countryFrom,
-                  countryTo,
-                  adjacent[adjacent.length - 1].step + 1
-                )
-              )
+            await calculateShortestPath(
+              countryFrom,
+              countryTo,
+              adjacent[adjacent.length - 1].step + 1
             );
             setDisabled(false);
           }}
