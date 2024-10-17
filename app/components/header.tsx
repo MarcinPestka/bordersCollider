@@ -2,10 +2,15 @@ import { Autocomplete, Button, TextField } from "@mui/material";
 import { useState } from "react";
 import data from "../../features.json";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { calculateBorder } from "../services/mapAlgorithms";
+import {
+  calculateBorder,
+  calculateShortestPath,
+} from "../services/mapAlgorithms";
 
 import {
   reset,
+  resetVisited,
+  selectAdjacent,
   selectCountryFrom,
   selectCountryTo,
   setAdjacent,
@@ -14,6 +19,7 @@ import {
 } from "../stores/countriesSlice";
 
 export default function Header() {
+  const adjacent = useAppSelector(selectAdjacent).value;
   const dispatch = useAppDispatch();
   const options = data.objects.world.geometries.map((x) => x.properties.name);
   const countryFrom = useAppSelector(selectCountryFrom).value;
@@ -55,10 +61,11 @@ export default function Header() {
           value={countryFrom}
           onChange={(_, newValue: string | null) => {
             dispatch(reset());
+            dispatch(resetVisited());
             dispatch(setFrom(newValue));
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Country From" variant="filled" />
+            <TextField {...params} label="Country From" variant="standard" />
           )}
         />
         <Autocomplete
@@ -69,14 +76,16 @@ export default function Header() {
           value={countryTo}
           onChange={(_, newValue: string | null) => {
             dispatch(reset());
+            dispatch(resetVisited());
             dispatch(setTo(newValue));
           }}
           renderInput={(params) => (
-            <TextField {...params} label="Country From" variant="filled" />
+            <TextField {...params} label="Country From" variant="standard" />
           )}
         />
       </div>
       <Button
+        data-testid="calculateBorder-button"
         disabled={disabled}
         style={{ width: "200px", display: "flex", justifyContent: "center" }}
         onClick={async () => {
@@ -96,6 +105,26 @@ export default function Header() {
       >
         {disabled ? "Calculating..." : "Calculate"}
       </Button>
+      {adjacent && adjacent.length > 0 && (
+        <Button
+          data-testid="bruteForce-button"
+          disabled={disabled}
+          style={{ width: "200px", display: "flex", justifyContent: "center" }}
+          onClick={async () => {
+            setDisabled(true);
+            dispatch(reset());
+            dispatch(resetVisited());
+            await calculateShortestPath(
+              countryFrom,
+              countryTo,
+              adjacent[adjacent.length - 1].step + 1
+            );
+            setDisabled(false);
+          }}
+        >
+          Brute force shortest route
+        </Button>
+      )}
     </div>
   );
 }
