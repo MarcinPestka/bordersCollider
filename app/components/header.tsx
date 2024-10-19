@@ -25,6 +25,39 @@ export default function Header() {
   const countryFrom = useAppSelector(selectCountryFrom).value;
   const countryTo = useAppSelector(selectCountryTo).value;
   const [disabled, setDisabled] = useState(false);
+
+  function clickToButton(newValue: string | null) {
+    dispatch(reset());
+    dispatch(resetRoute());
+    dispatch(setFrom(newValue));
+  }
+  function clickFromButton(newValue: string | null) {
+    dispatch(reset());
+    dispatch(resetRoute());
+    dispatch(setTo(newValue));
+  }
+  async function clickBorderButton() {
+    setDisabled(true);
+    dispatch(reset());
+    dispatch(
+      setAdjacent(
+        await calculateBorder([{ geoName: countryFrom, step: 0 }], countryTo, 0)
+      )
+    );
+    setDisabled(false);
+  }
+  async function clickBruteForceButton() {
+    setDisabled(true);
+    dispatch(reset());
+    dispatch(resetRoute());
+    await calculateShortestPath(
+      countryFrom,
+      countryTo,
+      adjacent[adjacent.length - 1].step + 1
+    );
+    setDisabled(false);
+  }
+
   return (
     <div
       id="test"
@@ -60,9 +93,7 @@ export default function Header() {
           style={{ width: "200px" }}
           value={countryFrom}
           onChange={(_, newValue: string | null) => {
-            dispatch(reset());
-            dispatch(resetRoute());
-            dispatch(setFrom(newValue));
+            clickToButton(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params} label="Country From" variant="standard" />
@@ -75,9 +106,7 @@ export default function Header() {
           style={{ width: "200px" }}
           value={countryTo}
           onChange={(_, newValue: string | null) => {
-            dispatch(reset());
-            dispatch(resetRoute());
-            dispatch(setTo(newValue));
+            clickFromButton(newValue);
           }}
           renderInput={(params) => (
             <TextField {...params} label="Country From" variant="standard" />
@@ -89,18 +118,7 @@ export default function Header() {
         disabled={disabled}
         style={{ width: "200px", display: "flex", justifyContent: "center" }}
         onClick={async () => {
-          setDisabled(true);
-          dispatch(reset());
-          dispatch(
-            setAdjacent(
-              await calculateBorder(
-                [{ geoName: countryFrom, step: 0 }],
-                countryTo,
-                0
-              )
-            )
-          );
-          setDisabled(false);
+          await clickBorderButton();
         }}
       >
         {disabled ? "Calculating..." : "Calculate"}
@@ -111,15 +129,7 @@ export default function Header() {
           disabled={disabled}
           style={{ width: "200px", display: "flex", justifyContent: "center" }}
           onClick={async () => {
-            setDisabled(true);
-            dispatch(reset());
-            dispatch(resetRoute());
-            await calculateShortestPath(
-              countryFrom,
-              countryTo,
-              adjacent[adjacent.length - 1].step + 1
-            );
-            setDisabled(false);
+            await clickBruteForceButton();
           }}
         >
           Brute force shortest route
