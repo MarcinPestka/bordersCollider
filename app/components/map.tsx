@@ -13,10 +13,12 @@ import {
   selectAdjacent,
   selectCountryFrom,
   selectCountryTo,
+  selectRoute,
 } from "../stores/countriesSlice";
 
 export default function Map() {
   const adjacent = useAppSelector(selectAdjacent).value;
+  const routes = useAppSelector(selectRoute).value;
   const countryFrom = useAppSelector(selectCountryFrom).value;
   const countryTo = useAppSelector(selectCountryTo).value;
   const [height, setHeight] = useState<number | undefined>(undefined);
@@ -42,13 +44,25 @@ export default function Map() {
 
   function setColor(geoId: string): string {
     const saturation = 0.05;
-
-    const adjacencyStep = adjacent.find((x) => x.geoName === geoId)?.step;
     if (geoId === countryFrom || geoId === countryTo) {
       return "#dedede";
-    } else if (adjacencyStep !== undefined) {
-      return `rgba(79, 104, 247, ${1 - saturation * adjacencyStep})`;
     }
+    if (adjacent && adjacent.length) {
+      const adjacencyStep = adjacent.find((x) => x.geoName === geoId)?.step;
+      if (adjacencyStep !== undefined) {
+        return `rgba(79, 104, 247, ${1 - saturation * adjacencyStep})`;
+      }
+    }
+    if (routes.length) {
+      if (
+        routes.some((x) => x.geoName === geoId) ||
+        countryFrom === geoId ||
+        countryTo === geoId
+      ) {
+        return "#7858b0";
+      }
+    }
+
     return "#fff";
   }
 

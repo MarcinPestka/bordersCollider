@@ -3,7 +3,12 @@ import { ZoomableGroupProps } from "react-simple-maps";
 import { describe, expect, it, vi } from "vitest";
 import Map from "../components/map";
 import { calculateBorder } from "../services/mapAlgorithms";
-import { setAdjacent, setFrom, setTo } from "../stores/countriesSlice";
+import {
+  appendRoute,
+  setAdjacent,
+  setFrom,
+  setTo,
+} from "../stores/countriesSlice";
 import { renderWithProviders } from "./test.utils";
 
 interface test {
@@ -16,6 +21,9 @@ interface test2 {
   to: string;
   array: test[];
 }
+// vi.spyOn(globalThis, "setTimeout").mockImplementation((fn: () => any) => {
+//   return fn();
+// });
 
 describe("Map component behaves correctly", async () => {
   vi.mock("react-simple-maps", async () => {
@@ -27,6 +35,19 @@ describe("Map component behaves correctly", async () => {
     };
   });
   const { store } = renderWithProviders(<Map />);
+
+  it("Behaves correctly when calculating routes", async () => {
+    const countries = [
+      { geoName: "Germany", step: 3 },
+      { geoName: "Tanzania", step: 3 },
+    ];
+    store.dispatch(appendRoute(countries));
+    for (const country of countries) {
+      expect(
+        (await screen.findByTestId(country.geoName)).getAttribute("fill")
+      ).toBe("#7858b0");
+    }
+  });
   it.each([
     {
       from: "Canada",
