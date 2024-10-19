@@ -49,7 +49,7 @@ export const AdjacentSlice = createSlice({
     popRoute: (state) => {
       state.value = [...state.value.slice(0, -1)];
     },
-    appendRoute: (state, action) => {
+    appendAdjacent: (state, action) => {
       state.value = [...state.value, action.payload];
     },
     reset: (state) => {
@@ -58,14 +58,14 @@ export const AdjacentSlice = createSlice({
   },
 });
 
-export const VisitedSlice = createSlice({
-  name: "visited",
+export const RouteSlice = createSlice({
+  name: "route",
   initialState: initialState,
   reducers: {
-    appendVisited: (state, action) => {
+    appendRoute: (state, action) => {
       state.value = [...state.value, ...action.payload];
     },
-    resetVisited: (state) => {
+    resetRoute: (state) => {
       state.value = [];
     },
   },
@@ -73,16 +73,16 @@ export const VisitedSlice = createSlice({
 
 export const { setFrom, removeFrom } = CountryFromSlice.actions;
 export const { setTo, removeTo } = CountryToSlice.actions;
-export const { setAdjacent, appendRoute, reset, popRoute } =
+export const { setAdjacent, appendAdjacent, reset, popRoute } =
   AdjacentSlice.actions;
-export const { appendVisited, resetVisited } = VisitedSlice.actions;
+export const { appendRoute, resetRoute } = RouteSlice.actions;
 
 export const selectCountryFrom = (state: RootState) => state.countryFrom;
 export const selectCountryTo = (state: RootState) => state.countryTo;
 export const selectAdjacent = (state: RootState) => state.adjacent;
-export const selectVisited = (state: RootState) => state.visited;
+export const selectRoute = (state: RootState) => state.route;
 
 export const CountryFromReducer = CountryFromSlice.reducer;
 export const CountryToReducer = CountryToSlice.reducer;
 export const AdjacentReducer = AdjacentSlice.reducer;
-export const VisitedReducer = VisitedSlice.reducer;
+export const RouteReducer = RouteSlice.reducer;

@@ -3,13 +3,13 @@ import {
   AdjacentReducer,
   CountryFromReducer,
   CountryToReducer,
-  VisitedReducer
+  RouteReducer,
 } from "./countriesSlice";
 const rootReducer = combineReducers({
   countryFrom: CountryFromReducer,
   countryTo: CountryToReducer,
   adjacent: AdjacentReducer,
-  visited: VisitedReducer,
+  route: RouteReducer,
 });
 
 export function setupStore(preloadedState?: Partial<RootState>) {

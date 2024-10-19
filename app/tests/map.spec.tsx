@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from "vitest";
 import Map from "../components/map";
 import { calculateBorder } from "../services/mapAlgorithms";
 import {
-  appendVisited,
+  appendRoute,
   setAdjacent,
   setFrom,
   setTo,
@@ -41,7 +41,7 @@ describe("Map component behaves correctly", async () => {
       { geoName: "Germany", step: 3 },
       { geoName: "Tanzania", step: 3 },
     ];
-    store.dispatch(appendVisited(countries));
+    store.dispatch(appendRoute(countries));
     for (const country of countries) {
       expect(
         (await screen.findByTestId(country.geoName)).getAttribute("fill")

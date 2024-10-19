@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { store } from "../root";
 import { calculateShortestPath } from "../services/mapAlgorithms";
-import { resetVisited } from "../stores/countriesSlice";
+import { resetRoute } from "../stores/countriesSlice";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 vi.spyOn(globalThis, "setTimeout").mockImplementation((fn: () => any) => {
@@ -10,7 +10,7 @@ vi.spyOn(globalThis, "setTimeout").mockImplementation((fn: () => any) => {
 
 describe("Shortes route brute force works", () => {
   beforeEach(() => {
-    store.dispatch(resetVisited());
+    store.dispatch(resetRoute());
   });
 
   it.each([
@@ -80,6 +80,6 @@ describe("Shortes route brute force works", () => {
     },
   ])("Sets from country correctly", async (values) => {
     await calculateShortestPath(values.from, values.to, values.steps);
-    expect(store.getState().visited.value).toEqual(values.result);
+    expect(store.getState().route.value).toEqual(values.result);
   });
 });

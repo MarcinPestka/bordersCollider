@@ -13,12 +13,12 @@ import {
   selectAdjacent,
   selectCountryFrom,
   selectCountryTo,
-  selectVisited,
+  selectRoute,
 } from "../stores/countriesSlice";
 
 export default function Map() {
   const adjacent = useAppSelector(selectAdjacent).value;
-  const routes = useAppSelector(selectVisited).value;
+  const routes = useAppSelector(selectRoute).value;
   const countryFrom = useAppSelector(selectCountryFrom).value;
   const countryTo = useAppSelector(selectCountryTo).value;
   const [height, setHeight] = useState<number | undefined>(undefined);

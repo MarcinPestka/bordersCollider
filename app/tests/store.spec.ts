@@ -1,19 +1,19 @@
 import { describe, expect, it } from "vitest";
 import {
   AdjacentReducer,
+  appendAdjacent,
   appendRoute,
-  appendVisited,
   CountryFromReducer,
   CountryToReducer,
   popRoute,
   removeFrom,
   removeTo,
   reset,
-  resetVisited,
+  resetRoute,
+  RouteReducer,
   setAdjacent,
   setFrom,
   setTo,
-  VisitedReducer,
 } from "../stores/countriesSlice";
 
 describe("CountryFromSlice works correctly", () => {
@@ -84,7 +84,7 @@ describe("AdjacentSlice works correctly", () => {
     expect(
       AdjacentReducer(
         { value: [{ geoName: "France", step: 0 }] },
-        appendRoute({ geoName: "Germany", step: 1 })
+        appendAdjacent({ geoName: "Germany", step: 1 })
       )
     ).toEqual({
       value: [
@@ -103,12 +103,12 @@ describe("AdjacentSlice works correctly", () => {
   });
 });
 
-describe("VisitedSlice works correctly", () => {
-  it("Appends visited countries correctly", () => {
+describe("RouteSlice works correctly", () => {
+  it("Appends route countries correctly", () => {
     expect(
-      VisitedReducer(
+      RouteReducer(
         { value: [{ geoName: "France", step: 0 }] },
-        appendVisited([{ geoName: "Germany", step: 1 }])
+        appendRoute([{ geoName: "Germany", step: 1 }])
       )
     ).toEqual({
       value: [
@@ -118,12 +118,9 @@ describe("VisitedSlice works correctly", () => {
     });
   });
 
-  it("Resets visited countries array", () => {
+  it("Resets route countries array", () => {
     expect(
-      VisitedReducer(
-        { value: [{ geoName: "France", step: 0 }] },
-        resetVisited()
-      )
+      RouteReducer({ value: [{ geoName: "France", step: 0 }] }, resetRoute())
     ).toEqual({
       value: [],
     });

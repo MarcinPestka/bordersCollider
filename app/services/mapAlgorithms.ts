@@ -1,8 +1,8 @@
 import data from "../../country_adj.json";
 import { store } from "../root";
 import {
+  appendAdjacent,
   appendRoute,
-  appendVisited,
   popRoute,
   setAdjacent,
 } from "../stores/countriesSlice";
@@ -75,9 +75,9 @@ export async function calculateShortestPath(
   visited = [...visited, ...adjacentArray];
   for (const adjacent of adjacentArray) {
     if (adjacent.geoName === searchTo) {
-      store.dispatch(appendVisited(store.getState().adjacent.value));
+      store.dispatch(appendRoute(store.getState().adjacent.value));
     }
-    store.dispatch(appendRoute(adjacent));
+    store.dispatch(appendAdjacent(adjacent));
     await timeout(10);
     if (
       (await calculateShortestPath(

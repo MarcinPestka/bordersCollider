@@ -9,7 +9,7 @@ import {
 
 import {
   reset,
-  resetVisited,
+  resetRoute,
   selectAdjacent,
   selectCountryFrom,
   selectCountryTo,
@@ -61,7 +61,7 @@ export default function Header() {
           value={countryFrom}
           onChange={(_, newValue: string | null) => {
             dispatch(reset());
-            dispatch(resetVisited());
+            dispatch(resetRoute());
             dispatch(setFrom(newValue));
           }}
           renderInput={(params) => (
@@ -76,7 +76,7 @@ export default function Header() {
           value={countryTo}
           onChange={(_, newValue: string | null) => {
             dispatch(reset());
-            dispatch(resetVisited());
+            dispatch(resetRoute());
             dispatch(setTo(newValue));
           }}
           renderInput={(params) => (
@@ -113,7 +113,7 @@ export default function Header() {
           onClick={async () => {
             setDisabled(true);
             dispatch(reset());
-            dispatch(resetVisited());
+            dispatch(resetRoute());
             await calculateShortestPath(
               countryFrom,
               countryTo,

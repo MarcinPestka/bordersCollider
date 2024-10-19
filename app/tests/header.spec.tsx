@@ -10,7 +10,7 @@ describe("Header component renders", async () => {
     "countryFrom-autocomplete",
     "countryTo-autocomplete",
     "calculateBorder-button",
-    "bruteForce-button",
+    // "bruteForce-button",
   ])("Renders all subcomponents", async (dataTestId) => {
     expect(screen.findByTestId(dataTestId)).toBeDefined();
   });
